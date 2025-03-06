@@ -1,0 +1,31 @@
+body {
+    background-color: Linen;
+    color: Indigo;
+    font-family: Arial;
+    margin: 0px;
+}
+
+main {background-color: AliceBlue	;
+    color: Indigo;
+    font-family: Arial;
+    margin: 5px;
+    padding: 10px;
+}
+
+header {background-color:  Teal; 
+    color: Ivory; 
+    padding: 15px;  
+    font-size: 16pt; 
+    text-align: center;
+}
+
+footer {background-color:  Teal; 
+    color: Ivory; 
+    padding: 12px; 
+    font-size: 12pt; 
+    text-align: left;
+}
+
+a {
+    text-decoration: none;
+}
