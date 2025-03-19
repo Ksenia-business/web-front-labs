@@ -26,6 +26,12 @@ footer {background-color:  Teal;
     text-align: left;
 }
 
+a {
+    color: green;
+    text-decoration: none;
+    transition: 1s 2s;
+}
+
 a:link {
     color: RosyBrown;
 }
@@ -39,6 +45,7 @@ a:hover {
     color: Red;
     text-shadow: -1px 10px 10px #C0C0C0;
     text-decoration: underline;
+    transition: 0.3s;
 }
 
 a:active {
