@@ -26,6 +26,22 @@ footer {background-color:  Teal;
     text-align: left;
 }
 
-a {
-    text-decoration: none;
+a:link {
+    color: RosyBrown;
+}
+
+a:visited {
+    color: Indigo;
+}
+
+a:hover {
+    background-color: LemonChiffon;
+    color: Red;
+    text-shadow: -1px 10px 10px #C0C0C0;
+    text-decoration: underline;
+}
+
+a:active {
+    color: black;
+    opacity: 0.3;
 }
