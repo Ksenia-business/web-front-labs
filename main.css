@@ -52,3 +52,21 @@ a:active {
     color: black;
     opacity: 0.3;
 }
+
+div.menu {
+    border: 7px solid #00880080;
+    border-radius: 5px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+div.menu:hover {
+    border: 9px solid #008B8B80;
+    background-color: #ffffff30;
+    box-shadow: 0 0 20px #00000030;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+}
