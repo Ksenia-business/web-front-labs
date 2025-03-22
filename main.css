@@ -8,7 +8,7 @@ body {
 main {background-color: AliceBlue	;
     color: Indigo;
     font-family: Arial;
-    margin: 5px;
+    margin: 10px 20px 42px;
     padding: 10px;
 }
 
@@ -24,6 +24,10 @@ footer {background-color:  Teal;
     padding: 12px; 
     font-size: 12pt; 
     text-align: left;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 a {
