@@ -14,7 +14,7 @@
             display: none;
         }
 
-        h1:hover+div {
+        .discount:hover div{
             display:block;
         }
 
@@ -33,9 +33,9 @@
             background-color: #f9f9f9;
             color: FireBrick;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            max-height: 150px;
+            overflow: hidden;
             transition: 3s;
-            max-height: auto;
-            transition-delay: 3s;
             text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
         }
 
@@ -43,13 +43,11 @@
             box-shadow: 5px 5px 10px rgba(240, 230, 140, 0.8);
             cursor: pointer;
             width: 1700px;
-            height: auto;
             background-color: #E6E6FA;
             color: MidnightBlue;
             border-radius: 30px;
-            transition-property: width, height;
             transition: 3s;
-            max-height: auto;
+            max-height: 1000px;
             border: 10px solid Gold;
         }
 
