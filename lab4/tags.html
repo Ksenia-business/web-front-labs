@@ -20,6 +20,7 @@
             position: relative;
             width: 80%;
             height: 600px;
+            margin: 50px;
         }
 
         .tag {
@@ -28,12 +29,22 @@
             cursor: pointer;
             transition: all 0.2s;
             z-index: 1;
+            animation-play-state: running;
         }
 
         .tag:hover {
             transform: scale(4);
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
             z-index: 2;
+            animation-play-state: paused;
+        }
+
+        @keyframes floatAnimation1 {
+            0% { top: 15%; left: 5%; }
+            25% { top: 30%; left: 15%; }
+            50% { top: 10%; left: 25%; }
+            75% { top: 25%; left: 10%; }
+            100% { top: 15%; left: 5%; }
         }
 
         .tag1 {
@@ -41,6 +52,15 @@
             left: 5%;
             color: green;
             transform: rotate(-20deg);
+            animation: floatAnimation1 20s linear infinite;
+        }
+
+        @keyframes floatAnimation2 {
+            0% { top: 18%; left: 12%; }
+            25% { top: 5%; left: 20%; }
+            50% { top: 28%; left: 8%; }
+            75% { top: 12%; left: 18%; }
+            100% { top: 18%; left: 12%; }
         }
 
         .tag2 {
@@ -48,6 +68,15 @@
             left: 12%;
             color: Teal;
             transform: rotate(-5deg);
+            animation: floatAnimation2 12s linear infinite;
+        }
+        
+        @keyframes floatAnimation3 {
+            0% { top: 10%; left: 18%; }
+            25% { top: 20%; left: 5%; }
+            50% { top: 15%; left: 28%; }
+            75% { top: 5%; left: 12%; }
+            100% { top: 10%; left: 18%; }
         }
 
         .tag3 {
@@ -55,12 +84,30 @@
             left: 18%;
             font-size: 20px;
             color: Black;
+            animation: floatAnimation3 11s linear infinite;
+        }
+
+        @keyframes floatAnimation4 {
+            0% { top: 5%; left: 25%; }
+            25% { top: 15%; left: 30%; }
+            50% { top: 0%; left: 15%; }
+            75% { top: 10%; left: 28%; }
+            100% { top: 5%; left: 25%; }
         }
 
         .tag4 {
             top: 19%;
             left: 25%;
             color: Purple;
+            animation: floatAnimation4 13s linear infinite;
+        }
+
+        @keyframes floatAnimation5 {
+            0% { top: 6%; left: 35%; }
+            25% { top: 20%; left: 40%; }
+            50% { top: 12%; left: 20%; }
+            75% { top: 0%; left: 30%; }
+            100% { top: 6%; left: 35%; }
         }
 
         .tag5 {
@@ -68,6 +115,15 @@
             left: 35%;
             color: Red;
             transform: rotate(10deg);
+            animation: floatAnimation5 15s linear infinite;
+        }
+
+        @keyframes floatAnimation6 {
+            0% { top: 0%; left: 25%; }
+            25% { top: 10%; left: 15%; }
+            50% { top: 5%; left: 35%; }
+            75% { top: 15%; left: 20%; }
+            100% { top: 0%; left: 25%; }
         }
 
         .tag6 {
@@ -76,6 +132,15 @@
             font-size: 35px;
             color: rgb(0, 69, 97);
             transform: rotate(-5deg);
+            animation: floatAnimation6 10s linear infinite;
+        }
+
+        @keyframes floatAnimation7 {
+            0% { top: 5%; left: 55%; }
+            25% { top: 20%; left: 60%; }
+            50% { top: 0%; left: 45%; }
+            75% { top: 10%; left: 58%; }
+            100% { top: 5%; left: 55%; }
         }
 
         .tag7 {
@@ -83,6 +148,15 @@
             left: 55%;
             color: rgb(194, 30, 166);
             transform: rotate(-10deg);
+            animation: floatAnimation7 25s linear infinite;
+        }
+
+        @keyframes floatAnimation8 {
+            0% { top: 20%; left: 30%; }
+            25% { top: 5%; left: 35%; }
+            50% { top: 30%; left: 20%; }
+            75% { top: 15%; left: 32%; }
+            100% { top: 20%; left: 30%; }
         }
 
         .tag8 {
@@ -90,12 +164,30 @@
             left: 30%;
             color: rgb(121, 121, 0);
             transform: rotate(30deg);
+            animation: floatAnimation8 30s linear infinite;
+        }
+
+        @keyframes floatAnimation9 {
+            0% { top: 18%; left: 35%; }
+            25% { top: 28%; left: 40%; }
+            50% { top: 5%; left: 30%; }
+            75% { top: 20%; left: 38%; }
+            100% { top: 18%; left: 35%; }
         }
 
         .tag9 {
             top: 40%;
             left: 20%;
             color: rgb(218, 58, 29);
+            animation: floatAnimation9 17s linear infinite;
+        }
+
+        @keyframes floatAnimation10 {
+            0% { top: 20%; left: 40%; }
+            25% { top: 10%; left: 48%; }
+            50% { top: 28%; left: 30%; }
+            75% { top: 5%; left: 42%; }
+            100% { top: 20%; left: 40%; }
         }
 
         .tag10 {
@@ -104,6 +196,15 @@
             font-size: 50px;
             color: rgb(23, 168, 10);
             transform: rotate(50deg);
+            animation: floatAnimation10 18s linear infinite;
+        }
+
+        @keyframes floatAnimation11 {
+            0% { top: 25%; left: 70%; }
+            25% { top: 10%; left: 60%; }
+            50% { top: 30%; left: 75%; }
+            75% { top: 15%; left: 68%; }
+            100% { top: 25%; left: 70%; }
         }
 
         .tag11 {
@@ -112,12 +213,30 @@
             color: OrangeRed;
             font-size: 26px;
             transform: rotate(-60deg);
+            animation: floatAnimation11 11s linear infinite;
+        }
+
+        @keyframes floatAnimation12 {
+            0% { top: 30%; left: 40%; }
+            25% { top: 15%; left: 30%; }
+            50% { top: 35%; left: 48%; }
+            75% { top: 20%; left: 35%; }
+            100% { top: 30%; left: 40%; }
         }
 
         .tag12 {
             top: 30%;
             left: 40%;
             color: black;
+            animation: floatAnimation12 8s linear infinite;
+        }
+
+        @keyframes floatAnimation13 {
+            0% { top: 35%; left: 48%; }
+            25% { top: 20%; left: 55%; }
+            50% { top: 40%; left: 38%; }
+            75% { top: 25%; left: 45%; }
+            100% { top: 35%; left: 48%; }
         }
 
         .tag13 {
@@ -126,6 +245,15 @@
             font-size: 20px;
             color: blue;
             transform: rotate(-70deg);
+            animation: floatAnimation13 22s linear infinite;
+        }
+
+        @keyframes floatAnimation14 {
+            0% { top: 60%; left: 55%; }
+            25% { top: 50%; left: 65%; }
+            50% { top: 70%; left: 50%; }
+            75% { top: 55%; left: 62%; }
+            100% { top: 60%; left: 55%; }
         }
 
         .tag14 {
@@ -133,18 +261,45 @@
             left: 55%;
             color: red;
             transform: rotate(-40deg);
+            animation: floatAnimation14 25s linear infinite;
+        }
+        
+        @keyframes floatAnimation15 {
+            0% { top: 65%; left: 62%; }
+            25% { top: 55%; left: 55%; }
+            50% { top: 90%; left: 90%; }
+            75% { top: 60%; left: 65%; }
+            100% { top: 65%; left: 62%; }
         }
 
         .tag15 {
             top: 65%;
             left: 62%;
             color: Maroon;
+            animation: floatAnimation15 16s linear infinite;
         }
 
+        @keyframes floatAnimation16 {
+            0% { top: 60%; left: 45%; }
+            25% { top: 70%; left: 50%; }
+            50% { top: 80%; left: 40%; }
+            75% { top: 65%; left: 48%; }
+            100% { top: 60%; left: 45%; }
+        }
+        
         .tag16 {
             top: 60%;
             left: 45%;
             color: green;
+            animation: floatAnimation16 13s linear infinite;
+        }
+
+        @keyframes floatAnimation17 {
+            0% { top: 50%; left: 10%; }
+            25% { top: 40%; left: 18%; }
+            50% { top: 60%; left: 5%; }
+            75% { top: 45%; left: 12%; }
+            100% { top: 50%; left: 10%; }
         }
 
         .tag17 {
@@ -153,6 +308,7 @@
             font-size: 25px;
             color: gray;
             transform: rotate(60deg);
+            animation: floatAnimation17 17s linear infinite;
         }
     </style>
 </head>
