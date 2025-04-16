@@ -21,6 +21,12 @@
             document.getElementById('brightnessOutput').innerText = value;
             document.getElementById('brightnessImage').style.filter = 'brightness(' + value + ')';
         }
+
+        function contrastChange() {
+            let value = document.getElementById('contrastValue').value + '%';
+            document.getElementById('contrastOutput').innerText = value;
+            document.getElementById('contrastImage').style.filter = 'contrast(' + value + ')';
+        }
     </script>
 
     <style>
@@ -33,7 +39,7 @@
     </header>
 
     <main>
-        <div>
+        <div style="padding: 15px;">
             Фильтр blur:
             <input type="range" min="0" max="20" value="0" onchange="blurChange()" id="blurValue">
             <span id="blurOutput"></span>
@@ -42,13 +48,21 @@
         <div><img src="SPb_2.jpg" id="blurImage" width="60%"></div>
 
         
-        <div>
+        <div style="padding: 15px;">
             Фильтр brightness:
             <input type="range" min="0" max="500" value="100" onchange="brightnessChange()" id="brightnessValue">
             <span id="brightnessOutput"></span>
         </div>
-        
+
         <div><img src="SPb_2.jpg" id="brightnessImage" width="60%"></div>
+
+        <div style="padding: 15px;">
+            Фильтр contrast:
+            <input type="range" min="0" max="500" value="100" onchange="contrastChange()" id="contrastValue">
+            <span id="contrastOutput"></span>
+        </div>
+        
+        <div><img src="SPb_2.jpg" id="contrastImage" width="60%"></div>
     </main>
 
     <footer>
