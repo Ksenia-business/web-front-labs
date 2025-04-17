@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Корзина товаров</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function Sum() {
+            let apple = document.getElementById("apple");
+            let pear = document.getElementById("pear");
+            let orange = document.getElementById("orange");
+            let melon = document.getElementById("melon");
+
+            let a = parseInt(apple.value);
+            let b = parseInt(pear.value);
+            let c = parseInt(orange.value);
+            let d = parseInt(melon.value);
+
+            if (a < 0) {
+                alert('Ошибка! \nВведите корректное количество товаров');
+                apple.focus(); /*фокус на элементе*/
+                apple.select(); /*выделение содержимого*/
+                apple.style.color = 'red';
+                apple.style.borderColor = 'red';
+                return;
+            }
+
+            if (b < 0) {
+                alert('Ошибка! \nВведите корректное количество товаров');
+                pear.focus();
+                pear.select();
+                pear.style.color = 'red';
+                pear.style.borderColor = 'red';
+                return;
+            }
+
+            if (c < 0) {
+                alert('Ошибка! \nВведите корректное количество товаров');
+                orange.focus();
+                orange.select();
+                orange.style.color = 'red';
+                orange.style.borderColor = 'red';
+                return;
+            }
+
+            if (d < 0) {
+                alert('Ошибка! \nВведите корректное количество товаров');
+                melon.focus();
+                melon.select();
+                melon.style.color = 'red';
+                melon.style.borderColor = 'red';
+                return;
+            }
+
+            apple.style.color = '';
+            apple.style.borderColor = '';
+
+            pear.style.color = '';
+            pear.style.borderColor = '';
+
+            orange.style.color = '';
+            orange.style.borderColor = '';
+
+            melon.style.color = '';
+            melon.style.borderColor = '';
+
+            let result = a*130 + b*100 + c*170 + d*320;
+        
+            let e = document.getElementById("TotalPrice")
+            e.innerHTML = 'Общая цена: ' + result + ' руб.'
+        }
+
+        function Clear() {
+            document.getElementById("apple").value = '';
+            document.getElementById("pear").value = '';
+            document.getElementById("orange").value = '';
+            document.getElementById("melon").value = '';
+            document.getElementById("TotalPrice").innerHTML = 'Общая цена: ';
+        }
+    </script>
+
+    <style>
+        div {
+            padding: 4px;
+        }
+
+        .products {
+            text-align: left;
+            border: 2px solid;
+            width: 350px;
+            height: 300px;
+            padding: 15px;
+            margin: 20px auto;
+        }
+        
+        .basket {
+            text-align: center;
+            font-weight: bold;
+            font-size: 23pt;
+            padding: 20px;
+            color: #bd063d;  
+        }
+
+        input[type="number"] {
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div class="products">
+            <div class="basket">Корзина товаров</div>
+            <label>Яблоки (130р/шт): <div><input type="number" id="apple" placeholder="Cколько нужно яблок?"></label></div>
+            <label>Груши (100р/шт): <div><input type="number" id="pear" placeholder="Введите количество груш"></label></div>
+            <label>Апельсины (170р/шт): <div><input type="number" id="orange" placeholder="Введите количество апельсинов"></label></div>
+            <label>Дыни (320р/шт): <div><input type="number" id="melon" placeholder="Сколько нужно дынь?"></label></div>
+            <input type="button" value="Рассчитать" onclick="Sum()">
+            <input type="button" value="Очистить" onclick="Clear()">
+            <div id="TotalPrice">Общая цена:</div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
