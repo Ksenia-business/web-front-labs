@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Объект Event</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function showCoords() {
+            let x = this.event.x;
+            let y = this.event.y;
+            let div = document.getElementById('block');
+
+            if(this.event.ctrlKey)
+                div.style.color = 'red';
+            else
+                div.style.color = 'black';
+           
+            div.innerHTML = '<b>x</b> = ' + x + 'px<br><b>y</b> = ' + y + 'px';
+
+            if (this.event.ctrlKey) {
+                div.innerHTML = div.innerHTML + "<br>Нажата клавиша Ctrl";
+            }
+
+            if (this.event.altKey) {
+                div.innerHTML = div.innerHTML + "<br>Нажата клавиша Alt";
+                div.style.backgroundColor = 'yellow';
+            } 
+            else {
+                div.style.backgroundColor = 'lightblue';
+            }
+
+            if (this.event.shiftKey) {
+                div.innerHTML = div.innerHTML + "<br>Нажата клавиша Shift";
+                div.style.border = '3px solid Indigo';
+                div.style.backgroundColor = 'Cyan';
+            } 
+            else {
+                div.style.border = '1px solid black';
+            }
+        }
+    </script>
+
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #block {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            background-color: lightblue;
+            cursor: crosshair;
+            text-align: center;
+            font-size: 16px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <div id="block" onmousemove="showCoords()"></div>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
