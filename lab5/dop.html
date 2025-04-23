@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Дополнительное задание</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function filterImage(event) {
+            let img = document.getElementById('image');
+            let info = document.getElementById('info');
+
+            let rect = img.getBoundingClientRect();
+            let x = event.clientX - rect.left;
+            let width = rect.width;
+
+            let ratio = x / width;
+            if (ratio < 0) ratio = 0;
+            if (ratio > 1) ratio = 1;
+
+            let blur = (ratio * 20).toFixed(2);
+            let grayscale = event.ctrlKey ? ratio.toFixed(2) : 0;
+            let contrast = event.altKey ? (0.5 + ratio * 1.5).toFixed(2) : 1;
+            let saturate = event.shiftKey ? (0.5 + ratio * 1.5).toFixed(2) : 1;
+
+            let filterString = 'blur(' + blur + 'px) ';
+
+            if (event.ctrlKey) {
+                filterString = 'grayscale(' + grayscale + ') ';
+            } else if (event.altKey) {
+                filterString = 'contrast(' + contrast + ') ';
+            }
+             else if (event.shiftKey) {
+                filterString = 'saturate(' + saturate + ') ';
+            }
+
+            img.style.filter = filterString;
+            info.innerHTML = 'Фильтр: ' + filterString;
+        }
+
+        function clearFilter() {
+            let img = document.getElementById('image');
+            let info = document.getElementById('info');
+            img.style.filter = 'none';
+            info.innerHTML = 'Фильтр: нет';
+        }
+    </script>
+
+    <style>
+         #image {
+            width: 60%;
+            display: block;
+            margin: 20px auto;
+            transition: filter 0.1s;
+            cursor: pointer;
+        }
+        #info {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        main {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <h2>При наведении на картинку применяется фильтр blur.</h2>
+        <p id="help">
+            Чем левее мышка, тем слабее эффект. Чем правее, тем сильнее.<br>
+            При нажатой клавише Ctrl - фильтр grayscale.<br>
+            При нажатой клавише Alt- фильтр contrast.<br>
+            При нажатой клавише Shift- фильтр saturate.
+        </p>
+        <div id="info">Фильтр: нет</div>
+        <img id="image" src="Nsk.jpg" onmousemove="filterImage(event)" onmouseleave="clearFilter()" alt="Nsk Image">
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
