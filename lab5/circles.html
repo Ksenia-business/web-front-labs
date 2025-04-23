@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Круги</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function createCircle(event) {
+            event.target.style.transform = 'scale(0)';
+            event.target.style.opacity = '0';
+        }
+
+        function reset() {
+            document.querySelectorAll('.circle').forEach(circle => {
+                circle.style.transform = 'scale(1)';
+                circle.style.opacity = '1';
+            });
+        }
+
+        function positionCircle() {
+            return Math.floor(Math.random() * 420) + 'px';
+        }
+
+        window.onload = function() {
+            document.querySelectorAll('.circle').forEach(circle => {
+                circle.style.top = positionCircle();
+                circle.style.left = positionCircle();
+            });
+        };
+    </script>
+
+    <style>
+        main {
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .circle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            font-size: 23px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(0, 0);
+            transition: transform 0.6s, opacity 0.6s;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #797979;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 5
+    </header>
+
+    <main>
+        <button onclick="reset()">Вернуть все круги</button>
+        <div class="container">
+            <div class="circle" style="background-color: #d38a5f;" onclick="createCircle(event)">1</div>
+            <div class="circle" style="background-color: #d33e5e;" onclick="createCircle(event)">2</div>
+            <div class="circle" style="background-color: #80b222;" onclick="createCircle(event)">3</div>
+            <div class="circle" style="background-color: #14cfdc;" onclick="createCircle(event)">4</div>
+            <div class="circle" style="background-color: #e9490f;" onclick="createCircle(event)">5</div>
+            <div class="circle" style="background-color: #5eff00;" onclick="createCircle(event)">6</div>
+            <div class="circle" style="background-color: #882aa5;" onclick="createCircle(event)">7</div>
+            <div class="circle" style="background-color: #e1e424;" onclick="createCircle(event)">8</div>
+            <div class="circle" style="background-color: #5c80cd;" onclick="createCircle(event)">9</div>
+            <div class="circle" style="background-color: #ffd769;" onclick="createCircle(event)">10</div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
