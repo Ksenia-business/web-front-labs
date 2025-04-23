@@ -15,11 +15,13 @@
             let pear = document.getElementById("pear");
             let orange = document.getElementById("orange");
             let melon = document.getElementById("melon");
+            let watermelon = document.getElementById("watermelon");
 
             let a = parseInt(apple.value);
             let b = parseInt(pear.value);
             let c = parseInt(orange.value);
             let d = parseInt(melon.value);
+            let e = parseInt(watermelon.value);
 
             if (a < 0) {
                 alert('Ошибка! \nВведите корректное количество товаров');
@@ -57,6 +59,15 @@
                 return;
             }
 
+            if (e < 0) {
+                alert('Ошибка! \nВведите корректное количество товаров');
+                watermelon.focus();
+                watermelon.select();
+                watermelon.style.color = 'red';
+                watermelon.style.borderColor = 'red';
+                return;
+            }
+
             apple.style.color = '';
             apple.style.borderColor = '';
 
@@ -69,10 +80,13 @@
             melon.style.color = '';
             melon.style.borderColor = '';
 
-            let result = a*130 + b*100 + c*170 + d*320;
+            watermelon.style.color = '';
+            watermelon.style.borderColor = '';
+
+            let result = a*130 + b*100 + c*170 + d*320 + e*290;
         
-            let e = document.getElementById("TotalPrice")
-            e.innerHTML = 'Общая цена: ' + result + ' руб.'
+            let f = document.getElementById("TotalPrice")
+            f.innerHTML = 'Общая цена: ' + result + ' руб.'
         }
 
         function Clear() {
@@ -80,6 +94,7 @@
             document.getElementById("pear").value = '';
             document.getElementById("orange").value = '';
             document.getElementById("melon").value = '';
+            document.getElementById("watermelon").value = '';
             document.getElementById("TotalPrice").innerHTML = 'Общая цена: ';
         }
     </script>
@@ -89,7 +104,7 @@
             text-align: left;
             border: 2px solid;
             width: 350px;
-            height: 330px;
+            height: 400px;
             padding: 15px;
             margin: 20px auto;
         }
@@ -128,6 +143,7 @@
             <label>Груши (100р/шт): <div><input type="number" id="pear" placeholder="Введите количество груш"></label></div>
             <label>Апельсины (170р/шт): <div><input type="number" id="orange" placeholder="Введите количество апельсинов"></label></div>
             <label>Дыни (320р/шт): <div><input type="number" id="melon" placeholder="Сколько нужно дынь?"></label></div>
+            <label>Арбузы (290р/шт): <div><input type="number" id="watermelon" placeholder="Сколько нужно арбузов?"></label></div>
             <input type="button" value="Рассчитать" onclick="Sum()">
             <input type="button" value="Очистить" onclick="Clear()">
             <div id="TotalPrice">Общая цена:</div>
