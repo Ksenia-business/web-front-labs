@@ -31,6 +31,27 @@
             });
             out.innerHTML = output;
         }
+
+        function changeColors() {
+            const header = document.getElementsByTagName('header')[0];
+            const rgb = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            header.style.color = rgb;
+        }
+
+        let timerNum;
+
+        function startChangeColors() {
+            changeColors();
+            timerNum = setInterval(changeColors, 1000);
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+        }
+
+        function stopChangeColors() {
+            clearInterval(timerNum);
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+        }
     </script>
     <style>
         .locale-info {
@@ -50,6 +71,31 @@
         #current-date {
             line-height: 1.6;
         }
+
+        button {
+            padding: 8px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff8e31;
+            color: rgb(255, 255, 255);
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d62e2e;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+        }
+
+        header {
+            transition: color 3s;
+        }
     </style>
 </head>
 <body onload="showDate()">
@@ -59,6 +105,10 @@
 
     <main>
         <div id="current-date"></div>
+        <div>
+            <button onclick="startChangeColors()" id="start-btn">Старт</button>
+            <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
+        </div>
     </main>
 
     <footer>
