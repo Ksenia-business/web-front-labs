@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Диаграмма</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    
+    <script>
+        function showDiagram() {
+            let data = [25, 90, 30, 59, 41, 73, 86, 17, 43, 97];
+            let colors = ['red', 'SpringGreen', 'Teal', 'Orchid', 'Chocolate', 'Khaki', 'HotPink', 'MediumAquamarine', 'Maroon', 'LightBlue'];
+            let bars = document.getElementsByClassName('bar');
+            const diagHeight = document.getElementById('diag').clientHeight;
+            const maxData = Math.max(...data);
+            const k = diagHeight / maxData * 0.9;
+
+            for(let i = 0; i < data.length; i++) {
+                bars[i].style.height = k*data[i] + 'px';
+                bars[i].style.backgroundColor = colors[i];
+                bars[i].textContent = data[i];
+            }
+        }
+    </script>
+    <style>
+        #diag {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end; 
+            height: 400px;
+            width: 500px;
+            padding: 15px;
+            border: 1px solid rgb(0, 0, 0);
+            margin: 15px auto;
+            background-color: rgb(241, 234, 234);
+            gap: 10px;
+        }
+
+        .bar {
+            width: 40px;
+            display: flex;
+            align-items: flex-start;
+            color: rgb(255, 255, 255);
+            font-size: 14px;
+            border: 2px solid rgb(148, 179, 179);
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body onload="showDiagram()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <div id="diag">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
