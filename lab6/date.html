@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Дата и время</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="books.js"></script>
+    <script>
+        function showDate() {
+            let out = document.getElementById('current-date');
+            let today = new Date();
+            let locales = [
+                { name: 'Дата и время для русской локали', code: 'ru-RU' },
+                { name: 'Дата и время для английской локали', code: 'en-US' },
+                { name: 'Дата и время для французской локали', code: 'fr-FR' },
+                { name: 'Дата и время для локали Германии', code: 'de-DE' },
+                { name: 'Дата и время для локали Японии', code: 'ja-JP' }
+            ];
+
+            let output = '';
+            locales.forEach(locale => {
+                output += `<div class="locale-info">
+                             <div class="locale-name">${locale.name}:</div>
+                             <div>${today.toLocaleString(locale.code)}</div>
+                           </div>`;
+            });
+            out.innerHTML = output;
+        }
+    </script>
+    <style>
+        .locale-info {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fcfff5;
+        }
+
+        .locale-name {
+            font-weight: bold;
+            color: #221f1f;
+            margin-bottom: 5px;
+        }
+
+        #current-date {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body onload="showDate()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <div id="current-date"></div>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
