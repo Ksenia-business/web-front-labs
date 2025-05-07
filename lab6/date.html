@@ -52,6 +52,21 @@
             document.getElementById('start-btn').disabled = false;
             document.getElementById('stop-btn').disabled = true;
         }
+    
+        let timeUpdateInterval;
+
+        function startUpdateTime() {
+            showDate();
+            timeUpdateInterval = setInterval(showDate, 1000);
+            document.getElementById('start-time-btn').disabled = true;
+            document.getElementById('stop-time-btn').disabled = false;
+        }
+
+        function stopUpdateTime() {
+            clearInterval(timeUpdateInterval);
+            document.getElementById('start-time-btn').disabled = false;
+            document.getElementById('stop-time-btn').disabled = true;
+        }
     </script>
     <style>
         .locale-info {
@@ -78,9 +93,10 @@
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            background-color: #ff8e31;
+            background-color: #52a539;
             color: rgb(255, 255, 255);
             transition: background-color 0.3s ease;
+            margin: 7px;
         }
 
         button:hover {
@@ -105,6 +121,10 @@
 
     <main>
         <div id="current-date"></div>
+        <div>
+            <button onclick="startUpdateTime()" id="start-time-btn">Обновление времени</button>
+            <button onclick="stopUpdateTime()" disabled id="stop-time-btn">Остановить обновление времени</button>
+        </div>
         <div>
             <button onclick="startChangeColors()" id="start-btn">Старт</button>
             <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
