@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Таблица умножения</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script>
+        function showMutipleTable() {
+            let multiplyBy = parseInt(document.getElementById('multiplyBy').value);
+            let startWith = parseInt(document.getElementById('startWith').value);
+            let endWith = parseInt(document.getElementById('endWith').value);
+            let tbl = document.getElementById('mtable');
+            let errorMessage = "";
+
+            if (isNaN(multiplyBy)) {
+                errorMessage += '<div style="color: red;">Введите корректное число в поле "Умножить на".</div>';
+            }
+            if (isNaN(startWith)) {
+                errorMessage += '<div style="color: red;">Введите корректное число в поле "Начать с".</div>';
+            }
+            if (isNaN(endWith)) {
+                errorMessage += '<div style="color: red;">Введите корректное число в поле "Закончить на".</div>';
+            }
+
+            if (startWith > endWith) {
+                errorMessage += '<div style="color: red;">"Начать с" не может быть больше, чем "Закончить на".</div>';
+            }
+
+            if (errorMessage !== "") {
+                tbl.innerHTML = errorMessage; // Вывод всех ошибок вместе
+                return;
+            }
+
+            tbl.innerHTML = '<h1>Таблица умножения на ' + multiplyBy + '</h1>';
+            for (i = startWith; i <= endWith; i++) {
+                let s = `<div>${i} * ${multiplyBy} = ${i * multiplyBy}</div>`;
+                tbl.innerHTML += s;
+            }
+        }
+    </script>
+
+    <style>
+        main {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #mtable {
+            font-size: 19px;
+            line-height: 1.6;
+        }
+
+        #mtable div {
+            margin-bottom: 8px;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        #inputContainer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #inputContainer input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 5px;
+            width: 80px;
+        }
+
+        #inputContainer button {
+            padding: 8px 16px;
+            background-color: #0869c4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="showMutipleTable()">
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <div id="mtable"></div>
+
+        <div id="inputContainer">
+            <label for="multiplyBy">Умножить на:</label>
+            <input type="number" id="multiplyBy" value="7">
+
+            <label for="startWith">Начать с:</label>
+            <input type="number" id="startWith" value="1">
+
+            <label for="endWith">Закончить на:</label>
+            <input type="number" id="endWith" value="10">
+
+            <button onclick="showMutipleTable()">Посчитать</button>
+        </div>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
