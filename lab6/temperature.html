@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Диаграмма температур</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+
+    <style>
+         #diagram-container {
+            display: flex;
+            align-items: flex-end;
+            height: 570px;
+            width: 1250px;
+            border: 1px solid #ccc;
+            margin: 30px auto;
+            position: relative;
+            background-color: rgb(249, 250, 241);
+        }
+
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 10%;
+            margin: 0.3%;
+            position: relative;
+            max-height: 90%;
+        }
+
+        .bar {
+            width: 100%;
+            position: absolute;
+            bottom: 0;    
+            text-align: center;  
+            color: white;  
+        }
+
+        .bar-max {
+            background-color: #d0bdf4;
+        }
+
+        .bar-min {
+            background-color: #8458B3;
+        }
+
+        .day-label {
+            font-size: 3px;
+            margin-top: 5px;
+        }
+
+        .highlighted .bar-min {
+            background-color: #51e2f5;
+        }
+
+        .highlighted .bar-max {
+            background-color: #9df9ef;
+        }
+
+        .temperature-value {
+            position: absolute;
+            top: -15px;       
+            left: 50%;
+            transform: translateX(-50%); 
+            color: black;
+            font-size: 12px;
+        }
+
+        #input-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #day-input {
+            width: 50px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        #info-container {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 7px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #395ba5;
+            color: rgb(255, 255, 255);
+            margin: 5px;
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 6
+    </header>
+
+    <main>
+        <h1>Диаграмма температуры за месяц</h1>
+
+        <div id="diagram-container"></div>
+
+        <div id="input-container">
+            <label for="day-input">Номер дня (от 1 до 30)</label>
+            <input type="number" id="day-input" min="1" max="30">
+            <button onclick="highlightDay()">Найти</button>
+        </div>
+
+        <div id="info-container">
+            <p id="temperature-info"></p>
+        </div>
+
+        <script>
+            const numDays = 30;
+            const minTemp = 0;
+            const maxTemp = 35;
+            let temperatures = [];
+
+            function generateTemperatures() {
+                temperatures = [];
+                for (let i = 0; i < numDays; i++) {
+                    let min = Math.floor(Math.random() * (maxTemp - minTemp + 1)) + minTemp;
+                    let max = Math.floor(Math.random() * (maxTemp - minTemp + 1)) + minTemp;
+                    if (min > max) {
+                        [min, max] = [max, min];
+                    }
+                    temperatures.push({ min: min, max: max });
+                }
+            }
+
+            function createDiagram() {
+                generateTemperatures();
+                const diagramContainer = document.getElementById('diagram-container');
+                diagramContainer.innerHTML = '';
+                const diagramHeight = diagramContainer.clientHeight - 100;
+                const tempRange = maxTemp - minTemp;
+
+                for (let i = 0; i < numDays; i++) {
+                    const dayData = temperatures[i];
+                    const minTempValue = dayData.min;
+                    const maxTempValue = dayData.max;
+
+                    const barContainer = document.createElement('div');
+                    barContainer.classList.add('bar-container');
+
+                    const barMax = document.createElement('div');
+                    barMax.classList.add('bar', 'bar-max');
+                    barMax.style.height = `${(maxTempValue - minTemp) / tempRange * diagramHeight}px`;
+                    barMax.innerHTML = `<span class="temperature-value">${maxTempValue}°C</span>`;
+
+                    const barMin = document.createElement('div');
+                    barMin.classList.add('bar', 'bar-min');
+                    barMin.style.height = `${(minTempValue - minTemp) / tempRange * diagramHeight}px`;
+                    barMin.innerHTML = `<span class="temperature-value">${minTempValue}°C</span>`;
+
+                    barContainer.appendChild(barMax);
+                    barContainer.appendChild(barMin);
+
+                    diagramContainer.appendChild(barContainer);
+                }
+            }
+
+            function highlightDay() {
+                const dayInput = document.getElementById('day-input');
+                const day = parseInt(dayInput.value, 10);
+                const temperatureInfo = document.getElementById('temperature-info');
+
+                const previousHighlightedBar = document.querySelector('.bar-container.highlighted');
+                if (previousHighlightedBar) {
+                    previousHighlightedBar.classList.remove('highlighted');
+                }
+
+                if (day >= 1 && day <= numDays) {
+                    const diagramContainer = document.getElementById('diagram-container');
+                    const bars = diagramContainer.querySelectorAll('.bar-container');
+                    const selectedBar = bars[day - 1];
+
+                    if (selectedBar) {
+                        selectedBar.classList.add('highlighted');
+                        const minTemp = temperatures[day - 1].min;
+                        const maxTemp = temperatures[day - 1].max;
+                        temperatureInfo.textContent = `Минимальная температура: ${minTemp}°C, Максимальная температура: ${maxTemp}°C`;
+                    }
+                } else {
+                    temperatureInfo.textContent = 'Неверный номер месяца.';
+                }
+            }
+            createDiagram();
+        </script> 
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
