@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Курс доллара</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="dollar-data.js"></script>
+
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            background-color: #be6464; 
+            color: white;
+            border: none;
+            padding: 12px 20px; 
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 18px; 
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: #af4040;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        #dollar-table {
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            border: 1px solid #ddddddd7; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #dollar-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        #detail {
+            display: none;
+            background-color: #d7d3f0;
+            padding: 15px;
+            border-radius: 6px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+    
+    <script>
+        function showExchange() {            
+            let table = document.getElementById('dollar-table');
+            for (let i = 0; i < exchange.length; i++) {
+                let tr = document.createElement('tr');
+                let td = document.createElement('td');
+                td.innerText = exchange[i];
+                tr.appendChild(td);
+                table.appendChild(tr);
+            }
+
+            let sum = 0;
+            for(let i = 0; i < exchange.length; i++) {
+                sum += exchange[i];
+            }
+            let average = sum / exchange.length;
+            document.getElementById('detail').innerText = `Средний курс: ${average.toFixed(2)}`;
+            document.getElementById('detail').style.display = 'block';
+            
+            document.querySelector('button').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <button onclick="showExchange()">Курс доллара</button>
+        <table border="1" id="dollar-table"></table>
+        <div id="detail"></div>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
