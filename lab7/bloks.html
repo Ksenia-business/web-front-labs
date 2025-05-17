@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Блоки</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+
+    <script>
+        function addNewBlock() {
+            let newBlock = document.createElement('div');
+            newBlock.style.background = 'green';
+            newBlock.style.height = '40px';
+
+            document.querySelector('main').appendChild(newBlock);
+        }
+    </script>
+
+    <style>
+        button {
+            background-color: #5565c5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #383475;
+        }
+        
+        div[style*="background: green"] {
+            width: 300px;       /* Новая ширина блока */
+            border: 2px solid #c5ce4f;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;    /* Увеличим размер текста */
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <button onclick="addNewBlock()">Добавить блок</button>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
