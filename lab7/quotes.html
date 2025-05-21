@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Котировки акций компании Softline</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            background-color: #be6464; 
+            color: white;
+            border: none;
+            padding: 12px 20px; 
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 18px; 
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: #af4040;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        table {
+            display: none;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            width: 500px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .positive {
+            color: green;
+        }
+        
+        .negative {
+            color: red;
+        }
+        
+        #detail {
+            display: none;
+            padding: 10px;
+            background-color: #d7d3f0;
+            border-radius: 4px;
+            width: 300px;
+            text-align: center;
+            line-height: 2;
+        }
+    </style>
+    
+    <script>
+        const stockDates = [
+            "05.05.2025", "06.05.2025", "07.05.2025", "08.05.2025", 
+            "12.05.2025", "13.05.2025", "14.05.2025", "15.05.2025", 
+            "16.05.2025"
+        ];
+        
+        const stockPrices = [
+            100.02, 100.76, 103.04, 105.26, 
+            106.04, 105.16, 104.36, 103.7, 
+            103.3
+        ];
+
+        function showStocks() {            
+            let table = document.getElementById('stocks-table');
+            table.style.display = 'table';
+            
+            while(table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+            
+            for (let i = 0; i < stockPrices.length; i++) {
+                let tr = document.createElement('tr');
+                
+                let dateTd = document.createElement('td');
+                dateTd.innerText = stockDates[i];
+                tr.appendChild(dateTd);
+                
+                let priceTd = document.createElement('td');
+                priceTd.innerText = stockPrices[i];
+                tr.appendChild(priceTd);
+                
+                let changeTd = document.createElement('td');
+                if (i === 0) {
+                    changeTd.innerText = "—";
+                } else {
+                    let diff = stockPrices[i] - stockPrices[i-1];
+                    changeTd.innerText = diff.toFixed(2);
+                    if (diff > 0) {
+                        changeTd.className = "positive";
+                    } else if (diff < 0) {
+                        changeTd.className = "negative";
+                    }
+                }
+                tr.appendChild(changeTd);
+                
+                table.appendChild(tr);
+            }
+
+            let sum = 0;
+            let min = stockPrices[0];
+            let max = stockPrices[0];
+            
+            for(let i = 0; i < stockPrices.length; i++) {
+                sum += stockPrices[i];
+                if (stockPrices[i] < min) min = stockPrices[i];
+                if (stockPrices[i] > max) max = stockPrices[i];
+            }
+            
+            let average = sum / stockPrices.length;
+            document.getElementById('detail').innerHTML = `
+                Среднее значение: ${average.toFixed(2)} руб<br>
+                Минимальное значение: ${min} руб<br>
+                Максимальное значение: ${max} руб
+            `;
+            document.getElementById('detail').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <button onclick="showStocks()">Курс акций Softline</button>
+        <table border="1" id="stocks-table">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Цена, руб</th>
+                    <th>Изменение</th>
+                </tr>
+            </thead>
+        </table>
+        <div id="detail"></div>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
