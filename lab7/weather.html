@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Прогноз погоды</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+
+    <style>
+         main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 3px;
+            text-align: center;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+       #weather-info {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+            font-weight: bold;
+            font-size: 18px;
+            color: #34495e;
+            margin-top: 10px;
+        }
+
+        #weather-info p {
+            margin: 5px 0;
+        } 
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <h1>Прогноз погоды в Новосибирске на сегодняшний день</h1>
+       <div id="weather-info">
+            <p>Температура в 8:00: <span id="temp-8"></span></p>
+            <p>Температура в 12:00: <span id="temp-12"></span></p>
+            <p>Температура в 20:00: <span id="temp-20"></span></p>
+        </div> 
+    </main>
+    
+    <script>
+        async function getWeatherData() {
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m&timezone=Asia%2FBangkok';
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const times = data.hourly.time;
+                const temperatures = data.hourly.temperature_2m;
+
+                const today = new Date().toISOString().slice(0, 10);
+
+                const temp8 = findTemperature(times, temperatures, today, 8);
+                const temp12 = findTemperature(times, temperatures, today, 12);
+                const temp20 = findTemperature(times, temperatures, today, 20);
+
+                document.getElementById('temp-8').innerText = temp8 ? `${temp8} °C` : 'Нет данных';
+                document.getElementById('temp-12').innerText = temp12 ? `${temp12} °C` : 'Нет данных';
+                document.getElementById('temp-20').innerText = temp20 ? `${temp20} °C` : 'Нет данных';
+
+            } catch (error) {
+                console.error("Ошибка при получении данных о погоде:", error);
+                document.getElementById('weather-info').innerText = "Не удалось получить данные о погоде.";
+            }
+        }
+
+        function findTemperature(times, temperatures, date, hour) {
+            const targetTime = `${date}T${String(hour).padStart(2, '0')}:00`;
+
+            const index = times.findIndex(time => time.startsWith(targetTime));
+
+            if (index !== -1) {
+                return temperatures[index];
+            } else {
+                return null;
+            }
+        }
+
+        window.onload = getWeatherData;
+    </script>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
