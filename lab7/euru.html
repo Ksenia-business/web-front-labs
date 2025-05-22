@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Курс евро</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            background-color: #be6464; 
+            color: white;
+            border: none;
+            padding: 12px 20px; 
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 18px; 
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: #af4040;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        #exchange-rate {
+            display: none;
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+            font-weight: bold;
+            font-size: 22px;
+            color: #3498db;
+            margin-top: 20px;
+            line-height: 2;
+        }
+
+        .date {
+            font-size: 16px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .previous-rate {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+            color: #9b3f7f;line-height: 2;
+
+        }
+
+        .difference {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .up {
+            color: green;
+        }
+        
+        .down {
+            color: red;
+        }
+    </style>
+    
+    <script>
+        function getEuroExchangeRate() {
+            const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+            fetch(url)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                const eur = json.Valute.EUR;
+                
+                const currentRate = eur.Value.toFixed(2);
+                const currentDate = new Date(json.Date).toLocaleDateString();
+                
+                const previousRate = eur.Previous.toFixed(2);
+                const previousDate = new Date(json.PreviousDate).toLocaleDateString();
+
+                const difference = (eur.Value - eur.Previous).toFixed(2);
+                let differenceText = '';
+                let differenceClass = '';
+                
+                if (difference > 0) {
+                    differenceText = `↑ Курс вырос на ${difference} ₽`;
+                    differenceClass = 'up';
+                } else if (difference < 0) {
+                    differenceText = `↓ Курс упал на ${Math.abs(difference)} ₽`;
+                    differenceClass = 'down';
+                } else {
+                    differenceText = 'Курс не изменился';
+                }
+                
+                const message = `
+                    Текущий курс евро: ${currentRate} ₽
+                    <div class="date">Дата: ${currentDate}</div>
+                    <div class="previous-rate">
+                        Предыдущий курс евро: ${previousRate} ₽
+                        <div class="date">Дата: ${previousDate}</div>
+                    </div>
+                    <div class="difference ${differenceClass}">${differenceText}</div>
+                    
+                    <p><a href="https://www.cbr-xml-daily.ru/">API для курсов ЦБ РФ</a></p>
+                `;
+
+                document.getElementById('exchange-rate').innerHTML = message;
+                document.getElementById('exchange-rate').style.display = 'block';
+            })
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <button onclick="getEuroExchangeRate()">Получить курс евро</button>
+        <div id="exchange-rate"></div>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
