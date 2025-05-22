@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чепурнова Ксения Анатольевна. Дополнительное задание</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon-32x32.png">
+    <link rel="icon" href="../favicon-16x16.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <style>
+        .weather-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+        .weather-info {
+            font-size: 18px;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .chart-container {
+            margin-bottom: 60px;
+            width: 100%;
+            height: 500px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .chart-wrapper {
+            width: 100%;
+            height: 100%;
+        }
+        .info-section {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        .chart-title {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <h1>Сравнение прогноза и фактических данных погоды</h1>
+    
+    <div class="info-section">
+        <p>Прогноз и фактические данные за последние 24 часа</p>
+    </div>
+    
+    <div class="weather-container">
+        <div class="weather-info">
+            <strong>Текущая температура:</strong> <span id="current-temp">-</span> °C
+        </div>
+        <div class="weather-info">
+            <strong>Текущая влажность:</strong> <span id="current-humidity">-</span> %
+        </div>
+        <div class="weather-info">
+            <strong>Текущее давление:</strong> <span id="current-pressure">-</span> гПа
+        </div>
+        <div class="weather-info">
+            <strong>Местоположение:</strong> <span id="location">Новосибирск</span>
+        </div>
+        <div class="weather-info">
+            <strong>Дата обновления:</strong> <span id="update-time">-</span>
+        </div>
+    </div>
+
+    <div class="chart-title">Температура (°C)</div>
+    <div class="chart-container">
+        <div class="chart-wrapper">
+            <canvas id="temperatureChart"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-title">Влажность (%)</div>
+    <div class="chart-container">
+        <div class="chart-wrapper">
+            <canvas id="humidityChart"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-title">Атмосферное давление (гПа)</div>
+    <div class="chart-container">
+        <div class="chart-wrapper">
+            <canvas id="pressureChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const latitude = 55.0415;
+            const longitude = 82.9346;
+            
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,surface_pressure&current=temperature_2m,relative_humidity_2m,surface_pressure&forecast_days=1&past_days=1&timezone=auto`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('current-temp').textContent = data.current.temperature_2m;
+                    document.getElementById('current-humidity').textContent = data.current.relative_humidity_2m;
+                    document.getElementById('current-pressure').textContent = data.current.surface_pressure;
+                    document.getElementById('update-time').textContent = new Date().toLocaleString();
+                    
+                    const labels = [];
+                    const tempForecast = [];
+                    const tempActual = [];
+                    const humidityForecast = [];
+                    const humidityActual = [];
+                    const pressureForecast = [];
+                    const pressureActual = [];
+                    
+                    const midPoint = Math.floor(data.hourly.time.length / 2);
+                    
+                    for (let i = 0; i < midPoint; i++) {
+                        const hourDate = new Date(data.hourly.time[i]);
+                        labels.push(`${hourDate.getDate()}.${(hourDate.getMonth()+1).toString().padStart(2, '0')} ${hourDate.getHours().toString().padStart(2, '0')}:00`);
+                        
+                        tempForecast.push(data.hourly.temperature_2m[i]);
+                        tempActual.push(data.hourly.temperature_2m[midPoint + i]);
+                        
+                        humidityForecast.push(data.hourly.relative_humidity_2m[i]);
+                        humidityActual.push(data.hourly.relative_humidity_2m[midPoint + i]);
+                        
+                        pressureForecast.push(data.hourly.surface_pressure[i]);
+                        pressureActual.push(data.hourly.surface_pressure[midPoint + i]);
+                    }
+                    
+                    const commonOptions = {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    autoSkip: false,
+                                    maxRotation: 45,
+                                    minRotation: 45,
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            const unit = context.datasetIndex === 1 ? 
+                                                (context.chart.id === 'humidityChart' ? '%' : ' гПа') : 
+                                                (context.chart.id === 'temperatureChart' ? '°C' : ' гПа');
+                                            label += context.parsed.y + unit;
+                                        }
+                                        return label;
+                                    }
+                                }
+                            },
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    
+                    const tempCtx = document.getElementById('temperatureChart').getContext('2d');
+                    new Chart(tempCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Прогноз температуры (°C)',
+                                    data: tempForecast,
+                                    backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                                    borderColor: 'rgba(255, 159, 64, 1)',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: 'Фактическая температура (°C)',
+                                    data: tempActual,
+                                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            ...commonOptions,
+                            scales: {
+                                ...commonOptions.scales,
+                                y: {
+                                    ...commonOptions.scales.y,
+                                    title: {
+                                        display: true,
+                                        text: 'Температура (°C)',
+                                        font: {
+                                            size: 14
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    
+                    const humidityCtx = document.getElementById('humidityChart').getContext('2d');
+                    new Chart(humidityCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Прогноз влажности (%)',
+                                    data: humidityForecast,
+                                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: 'Фактическая влажность (%)',
+                                    data: humidityActual,
+                                    backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            ...commonOptions,
+                            scales: {
+                                ...commonOptions.scales,
+                                y: {
+                                    ...commonOptions.scales.y,
+                                    beginAtZero: true,
+                                    max: 100,
+                                    title: {
+                                        display: true,
+                                        text: 'Влажность (%)',
+                                        font: {
+                                            size: 14
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    
+                    const pressureCtx = document.getElementById('pressureChart').getContext('2d');
+                    new Chart(pressureCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Прогноз давления (гПа)',
+                                    data: pressureForecast,
+                                    backgroundColor: 'rgba(153, 102, 255, 0.7)',
+                                    borderColor: 'rgba(153, 102, 255, 1)',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: 'Фактическое давление (гПа)',
+                                    data: pressureActual,
+                                    backgroundColor: 'rgba(255, 206, 86, 0.7)',
+                                    borderColor: 'rgba(255, 206, 86, 1)',
+                                    borderWidth: 1
+                                }
+                            ]
+                        },
+                        options: {
+                            ...commonOptions,
+                            scales: {
+                                ...commonOptions.scales,
+                                y: {
+                                    ...commonOptions.scales.y,
+                                    title: {
+                                        display: true,
+                                        text: 'Давление (гПа)',
+                                        font: {
+                                            size: 14
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка при получении данных:', error);
+                    alert('Произошла ошибка при загрузке данных о погоде. Пожалуйста, попробуйте позже.');
+                });
+        });
+    </script>
+    </main>
+
+    <footer>
+        &copy; Ксения Чепурнова, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
