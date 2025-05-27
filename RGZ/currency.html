@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс валют</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="currency.js"></script>
+    <style>
+        body {
+            background-color: white;
+            color: #333;
+        }
+
+        main {
+            background-color: white;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: #003366;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #0092cc;
+        }
+
+        h2 {
+            color: #003366;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #003366;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .calculator {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .result {
+            color: #003366;
+        }
+
+        .chart-container {
+            background-color: white;
+        }
+
+        .selected-bar-info {
+            color: #0092cc;
+        }        
+        
+        .calculator {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e1e5eb;
+        }
+        
+        .converter {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        input, select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #0092cc;
+            box-shadow: 0 0 0 2px rgba(0, 146, 204, 0.2);
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #0092cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #f0f8ff;
+            border-radius: 6px;
+            color: #003c6d;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 500px;
+            margin: 30px 0;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e1e5eb;
+        }
+        
+        .selected-bar-info {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 18px;
+            color: #0092cc;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-radius: 6px;
+        }
+
+        .fa-exchange-alt {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="logo_rkk_1.png" alt="Логотип РКК Энергия">
+                <div class="logo-text">
+                    РАКЕТНО-КОСМИЧЕСКАЯ КОРПОРАЦИЯ «ЭНЕРГИЯ»<br>ИМЕНИ С.П. КОРОЛЕВА
+                </div>
+                <img src="logo_roscosmos-1.png" alt="Логотип Роскосмоса">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> О компании</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> Новости</a></li>
+                    <li><a href="currency.html" class="active-page"><i class="fas fa-chart-line"></i> Курс валют</a></li>
+                    <li><a href="contacts.html"><i class="fas fa-map-marker-alt"></i> Контакты</a></li>
+                    <li><a href="video.html"><i class="fas fa-video"></i> Видео</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <h1>Курс Таиландского бата (THB)</h1>
+
+        <div class="calculator">
+            <h2>Калькулятор валют</h2>
+            <div class="converter">
+                <input type="number" id="amount" value="100" min="0" step="0.01">
+                <select id="from-currency">
+                    <option value="RUB">Российский рубль (RUB)</option>
+                    <option value="THB">Таиландский бат (THB)</option>
+                </select>
+                <span><i class="fas fa-exchange-alt"></i></span>
+                <select id="to-currency">
+                    <option value="THB">Таиландский бат (THB)</option>
+                    <option value="RUB">Российский рубль (RUB)</option>
+                </select>
+                <button id="convert-btn"><i class="fas fa-calculator"></i> Перевести</button>
+            </div>
+            <div class="result" id="result">Загрузка курса...</div>
+        </div>
+
+        <h3>Динамика курса THB за последние 2 месяца</h3>
+        <div class="selected-bar-info" id="selected-bar-info">Выберите дату на графике для просмотра курса</div>
+        <div class="chart-container">
+            <canvas id="exchange-rate-chart"></canvas>
+        </div>
+    </main>
+
+    <a href="#" class="back-to-top"><i class= "fas fa-arrow-up"></i></a>
+
+    <footer>            
+        <div class="copyright">
+            &copy; 2025 ПАО «РКК «Энергия» имени С.П. Королёва»
+        </div>
+    </footer>
+</body>
+</html>
