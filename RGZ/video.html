@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>РКК "Энергия". Видео</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: white;
+            color: #333;
+        }
+
+        .container {
+            background-color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: #003366;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 50%;
+            height: 0;
+            overflow: hidden;
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="logo_rkk_1.png">
+                <div class="logo-text">
+                    РАКЕТНО-КОСМИЧЕСКАЯ КОРПОРАЦИЯ «ЭНЕРГИЯ»<br>ИМЕНИ С.П. КОРОЛЕВА
+                </div>
+                <img src="logo_roscosmos-1.png">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> О компании</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> Новости</a></li>
+                    <li><a href="currency.html"><i class="fas fa-chart-line"></i> Курс валют</a></li>
+                    <li><a href="contacts.html"><i class="fas fa-map-marker-alt"></i> Контакты</a></li>
+                    <li><a href="video.html" class="active-page"><i class="fas fa-video"></i> Видео</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h1>Первый искусственный спутник земли</h1>
+
+            <div class="video-container">
+                 <iframe width="560" height="315" src="https://rutube.ru/video/embed/830336239ea64dfd4ac4d8bbb486b741/"
+                        frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </main>
+
+    <a href="#" class="back-to-top"><i class= "fas fa-arrow-up"></i></a>
+
+    <footer>            
+            <div class="copyright">
+                &copy; 2025 ПАО «РКК «Энергия» имени С.П. Королёва»
+            </div>
+        </div>
+    </footer>  
+</body>
+</html>
