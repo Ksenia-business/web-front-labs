@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>РКК "Энергия". Новости</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: white;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: white;
+        }
+
+        h1 {
+            font-size: 40px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            color: #003366;
+            position: relative;
+            padding-bottom: 16px;
+            text-align: center;
+        }
+
+        .news-card {
+            margin-bottom: 32px;
+            padding: 24px;
+            background-color: #eef4fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 60, 109, 0.1);
+            border-left: 4px solid #0092cc;
+        }
+
+        .news-date {
+            color: #0092cc; 
+        }
+        
+        .news-title {
+            color: #003366; 
+        }
+
+        .news-excerpt {
+            color: #555;
+            opacity: 1;
+            margin-bottom: 50px;
+        }
+
+        p, .news-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        p.visible, .news-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .show-news-button {
+            background-color: #0092cc;
+            color: white;
+            border: none;
+            padding: 9px 19px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .show-news-button:hover {
+            background-color: #0077aa;
+            transform: translateY(-1px);
+        }
+
+        .show-news-button:active {
+            transform: translateY(0);
+        }
+
+        .news-full-text {
+            display: none;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .news-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        .news-banner {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="logo_rkk_1.png">
+                <div class="logo-text">
+                    РАКЕТНО-КОСМИЧЕСКАЯ КОРПОРАЦИЯ «ЭНЕРГИЯ»<br>ИМЕНИ С.П. КОРОЛЕВА
+                </div>
+                <img src="logo_roscosmos-1.png">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> О компании</a></li>
+                    <li><a href="news.html" class="active-page"><i class="fas fa-newspaper"></i> Новости</a></li>
+                    <li><a href="currency.html"><i class="fas fa-chart-line"></i> Курс валют</a></li>
+                    <li><a href="contacts.html"><i class="fas fa-map-marker-alt"></i> Контакты</a></li>
+                    <li><a href="video.html"><i class="fas fa-video"></i> Видео</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="news-banner">
+        <img src="news.png" alt="Новости РКК Энергия" style="width:100%; max-height:300px; object-fit:cover;">
+    </div>
+    
+    <main class="main">
+        <div class="container">
+            <section class="news">
+                <div class="news-card">
+                    <span class="news-date">23.05.2025</span>
+                    <h2 class="news-title">Назначен новый генеральный директор РКК «Энергия»</h2>
+                    <p class="news-excerpt">Советом директоров Публичного акционерного общества «Ракетно-космическая корпорация «Энергия» имени С.П. Королёва» принято решение о назначении генеральным директором предприятия...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Советом директоров Публичного акционерного общества «Ракетно-космическая корпорация «Энергия» 
+                        имени С.П. Королёва» принято решение о назначении генеральным директором предприятия Игоря 
+                        Евгеньевича Мальцева, с 2022 года возглавляющего Акционерное общество «Научно-производственный 
+                        центр автоматики и приборостроения имени академика Н.А. Пилюгина».
+                        За время работы в АО «НПЦАП» под руководством И.Е. Мальцева в кратчайшие сроки были поставлены 
+                        на производство и сданы заказчику новые образцы техники, налажена работа по наращиванию собственных 
+                        производственных мощностей и локализации на предприятии производства новых изделий в целях обеспечения 
+                        независимости от импортных покупных комплектующих изделий.
+                        До назначения генеральным директором АО «НПЦАП» с 2016 года Игорь Евгеньевич Мальцев работал на 
+                        Заводе экспериментального машиностроения РКК «Энергия» заместителем генерального директора по 
+                        качеству, генеральным директором, управляющим директором. Под его руководством на заводе были 
+                        успешно проведены мероприятия по повышению качества выпускаемой техники, внедрены современные 
+                        методы контроля и управления, проведена сертификация системы менеджмента качества.
+                        Игорь Евгеньевич Мальцев родился в 1965 году. В 1987 году окончил Военный инженерный Краснознаменный 
+                        институт имени А.Ф. Можайского по специальности «Летательные аппараты», в 2014 году завершил обучение в Российской 
+                        правовой академии Министерства юстиции РФ по специальности «Юриспруденция». Кандидат технических наук. 
+                        Награжден Орденом «За заслуги перед Отечеством» IV степени. 
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <span class="news-date">21.04.2025</span>
+                    <h2 class="news-title">Юрию Павловичу Семенову – 90 лет</h2>
+                    <p class="news-excerpt">20 апреля исполнилось 90 лет Юрию Павловичу Семенову. Он руководил предприятием...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        20 апреля исполнилось 90 лет Юрию Павловичу Семенову. Он руководил предприятием в один из самых сложных 
+                        периодов для отечественной космонавтики. В условиях политических и экономических перемен в стране, обусловленных 
+                        новой идеологией и распадом Советского Союза, и постоянного сокращения финансирования ракетно-космической отрасли. 
+                        Только человек, бесконечно преданный идее освоения космоса и обладающий уникальными организаторскими способностями, 
+                        мог в сложившихся обстоятельствах не просто сохранить «Энергию», но и добиться результатов, о которых принято 
+                        говорить: «это было сделано впервые».
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <span class="news-date">20.04.2025</span>
+                    <h2 class="news-title">Экипаж корабля «Союз МС-26» вернулся с МКС на Землю</h2>
+                    <p class="news-excerpt">Сегодня в 04:20 по московскому времени спускаемый аппарат корабля «Союз МС-26» с космонавтами...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Сегодня в 04:20 по московскому времени спускаемый аппарат корабля «Союз МС-26» с космонавтами Госкорпорации 
+                        «Роскосмос» Алексеем Овчининым, Иваном Вагнером и астронавтом NASA Дональдом Петтитом приземлился в районе 
+                        казахстанского города Жезказган.
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <span class="news-date">18.04.2025</span>
+                    <h2 class="news-title">Смена руководства в РКК «Энергия»</h2>
+                    <p class="news-excerpt">Совет директоров Ракетно-космической корпорации «Энергия» (входит в состав Госкорпорации «Роскосмос»)...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Совет директоров Ракетно-космической корпорации «Энергия» (входит в состав Госкорпорации «Роскосмос») утвердил генеральным 
+                        директором предприятия Сергея Романова. С ним заключен срочный договор, действующий до даты назначения генерального директора 
+                        в установленном порядке.
+                    </div>
+                </div>
+
+                 <div class="news-card">
+                    <span class="news-date">08.04.2025</span>
+                    <h2 class="news-title">«Союз МС-27» причалил к МКС</h2>
+                    <p class="news-excerpt">Сегодня в 11:58 по московскому времени пилотируемый транспортный...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Сегодня в 11:58 по московскому времени пилотируемый транспортный корабль «Союз МС-27» в автоматическом режиме пристыковался 
+                        к узловому модулю «Причал» российского сегмента Международной космической станции.
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <span class="news-date">31.03.2025</span>
+                    <h2 class="news-title">Информационное сообщение о проведении внеочередного общего собрания акционеров ПАО «РКК «Энергия»</h2>
+                    <p class="news-excerpt">Публичное акционерное общество «Ракетно-космическая корпорация «Энергия» имени...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Публичное акционерное общество «Ракетно-космическая корпорация «Энергия» имени С.П. Королёва» сообщает о проведении 
+                        внеочередного общего собрания акционеров в форме заочного голосования.
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <span class="news-date">13.03.2025</span>
+                    <h2 class="news-title">Ключ на старт! Космос для детей</h2>
+                    <p class="news-excerpt">Госкорпорация «Роскосмос» и ВДЦ «Смена»...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Госкорпорация «Роскосмос» и ВДЦ «Смена» объявляют набор на программу «Ключ на старт! Космос для детей!»
+                    </div>
+                </div>
+
+                  <div class="news-card">
+                    <span class="news-date">02.03.2025</span>
+                    <h2 class="news-title">Грузовой корабль «Прогресс МС-30» прибыл на МКС</h2>
+                    <p class="news-excerpt">Сегодня в 2:04 по московскому времени грузовой корабль «Прогресс МС-30» в автоматическом...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Сегодня в 2:04 по московскому времени грузовой корабль «Прогресс МС-30» в автоматическом режиме пристыковался к 
+                        служебному модулю «Звезда» российского сегмента Международной космической станции. Корабль был запущен с космодрома 
+                        Байконур ракетой-носителем «Союз-2.1а» 28 февраля.
+                    </div>
+                </div>
+                
+                 <div class="news-card">
+                    <span class="news-date">28.02.2025</span>
+                    <h2 class="news-title">Грузовой корабль «Прогресс МС-30» отправился к МКС</h2>
+                    <p class="news-excerpt">Сегодня в 00:24:27 по московскому времени со стартового комплекса...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Сегодня в 00:24:27 по московскому времени со стартового комплекса 31-й площадки космодрома Байконур специалисты 
+                        предприятий Госкорпорации «Роскосмос» выполнили пуск ракеты-носителя «Союз-2.1а» с грузовым кораблём «Прогресс МС-30».
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <span class="news-date">03.12.2024</span>
+                    <h2 class="news-title">РОС и коммерция: что может дать бизнесу национальная орбитальная станция?</h2>
+                    <p class="news-excerpt">Технологический конгресс прошёл на площадке Московского инновационного кластера...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Технологический конгресс прошёл на площадке Московского инновационного кластера «Ломоносов». Основной темой стало 
+                        будущее Российской орбитальной станции, над созданием которой сейчас работает ракетно-космическая корпорация «Энергия». 
+                        Представители научных организаций, частных предприятий и образовательных проектов обсудили, какие возможности РОС открывает 
+                        перед компаниями, заинтересованными в развитии космической индустрии, особенно – в части предоставления коммерческих услуг.
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <span class="news-date">23.11.2024</span>
+                    <h2 class="news-title">На МКС прибыл грузовой корабль «Прогресс МС-29»</h2>
+                    <p class="news-excerpt">Сегодня в 17:31 по московскому времени грузовой корабль «Прогресс МС-29»...</p>
+                    <button class="show-news-button">Показать полностью</button>
+                    <div class="news-full-text">
+                        Сегодня в 17:31 по московскому времени грузовой корабль «Прогресс МС-29» в автоматическом режиме пристыковался к 
+                        малому исследовательскому модулю «Поиск» российского сегмента Международной космической станции.
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>            
+        <div class="copyright">
+            &copy; 2025 ПАО «РКК «Энергия» имени С.П. Королёва»
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top"><i class= "fas fa-arrow-up"></i></a>
+    
+    <script>
+        function checkVisibility() {
+            const elements = document.querySelectorAll('h1, .news-card');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('load', checkVisibility);
+        window.addEventListener('scroll', checkVisibility);
+        
+        const showNewsButtons = document.querySelectorAll('.show-news-button');
+        showNewsButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.news-card');
+                const fullText = card.querySelector('.news-full-text');
+                fullText.style.display = fullText.style.display === 'block' ? 'none' : 'block';
+                this.textContent = this.textContent === 'Показать полностью' ? 'Скрыть' : 'Показать полностью';
+            });
+        });
+    </script>
+</body>
+</html>
