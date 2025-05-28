@@ -57,6 +57,7 @@
                     <tr>
                         <th>Название</th>
                         <th>Редактировать</th>
+                        <th>Удалить</th>
                     </tr>
                 </thead>
                 <tr v-for="(flower, id) in flowers">
@@ -70,8 +71,17 @@
                         </button>
                         <div class="spinner-border text-primary" role="status" v-if="flower === null"></div>
                     </td>
-                </tr>
+                    <td>
+                            <button @click="removeFlower(id)" class="btn btn-danger" v-if="flower !== null">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
+            <button @click="addFlower" class="btn btn-success mb-3">
+                <i class="bi bi-plus-circle"></i> Добавить цветок
+            </button>
             <hr>
 
             <h2>Калькулятор</h2>
@@ -148,6 +158,17 @@
                     this.a = 1;
                     this.b = 10;
                     this.result = '';
+                },
+                addFlower() {
+                    const newFlower = prompt('Введите название нового цветка:');
+                    if (newFlower) {
+                        this.flowers.push(newFlower);
+                    }
+                },
+                removeFlower(id) {
+                    if (confirm('Вы уверены, что хотите удалить этот цветок?')) {
+                        this.flowers.splice(id, 1);
+                    }
                 }
             }
         }).mount('#app');
