@@ -22,14 +22,17 @@
         <div id="app">
             <h1 :title="messageRus">{{ message }}</h1>
             <p>Счётчик: {{ counter }}</p>
-            <button @click="incCounter" v-if="counter < 10">++</button>
-            <button @click="decCounter" v-if="counter > 0">--</button>
+            <button @click="incCounter" class="btn btn-success" v-if="counter < 10"><i class="bi bi-plus-lg"></i> Увеличить</button>
+            <button @click="decCounter" class="btn btn-danger" v-if="counter > 0"> <i class="bi bi-dash-lg"></i> Уменьшить</button>
             <hr>
 
             <h2>Пользователь:</h2>
             <div>Имя: {{ user.name }}</div>
             <div>Возраст: {{ user.age }}</div>
             <div>Телефон: {{ user.tel }}</div>
+            <button @click="changeUser" class="btn btn-warning mt-2">
+                <i class="bi bi-pencil-square"></i> Изменить данные
+            </button>
             <hr>
 
             <div class="card" style="width: 18rem;">
@@ -37,7 +40,11 @@
                     <h2 class="card-title">Цветы</h2>
                     <ul class="list-group">
                         <li v-for="(flower, id) in flowers" class="list-group-item">
-                            {{ flower }} <button @click="edit(id, flower)">?</button>
+                            <span v-if="flower === null">загружается...</span>
+                            <span v-else>{{ flower }}</span>
+                            <button @click="edit(id, flower)" class="btn btn-sm btn-primary">
+                                <i class="bi bi-pencil-fill"></i>
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -79,10 +86,15 @@
                     <input type="number" v-model="b" class="form-control">
                 </div>
                 <div class="col-auto">
-                    <button @click="sum" class="btn btn-primary">=</button>
+                    <button @click="sum" class="btn btn-primary"> = </button>
                 </div>
                 <div class="col-auto">
                     <span class="badge text-bg-primary fs-5">{{ result }}</span>
+                </div>
+                <div class="col-auto">
+                    <button @click="resetCalc" class="btn btn-secondary">
+                        <i class="bi bi-arrow-counterclockwise"></i> Сбросить
+                    </button>
                 </div>
             </div>
         </div>
@@ -126,6 +138,16 @@
                 },
                 sum() {
                     this.result = this.a + this.b;
+                },
+                changeUser() {
+                    this.user.name = prompt('Введите имя:', this.user.name);
+                    this.user.age = prompt('Введите возраст:', this.user.age);
+                    this.user.tel = prompt('Введите телефон:', this.user.tel);
+                },
+                resetCalc() {
+                    this.a = 1;
+                    this.b = 10;
+                    this.result = '';
                 }
             }
         }).mount('#app');
